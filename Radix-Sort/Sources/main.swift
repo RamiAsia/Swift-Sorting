@@ -12,14 +12,21 @@ class RadixSort {
         return bucketize(array: array, exp: power(base: 10, power: maxDigits))
     }
 
+
+    // MARK: Utility Methods
+
     func bucketize (array: [Int], exp: Int) -> [Int] {
+        // In the case we are done traversing the digits, exit method
         if(countDigits(number: exp) <= 0) {
             return array
         }
+
+        // Initialize the array we want to store our results in, as well as the buckets
         var resultArray = [Int]()
         var buckets = Dictionary<Int, [Int]>()
+
+        // Take all numbers in the array and put them in their respective buckets
         for number in array {
-            //buckets[(number/exp)%10] = buckets[(number/exp)%10] ? (buckets[(number/exp)%10]! + [number]) : [number]
             if buckets[(number/exp)%10] != nil {
                 buckets[(number/exp)%10]! += [number]
             } else {
@@ -27,8 +34,10 @@ class RadixSort {
             }
         }
 
+        /* Once done filling buckets, traverse the buckets in ascending order
+        ** and recursively sort them, then add the buckets to the result array
+        */
         for index in 0..<10 {
-            //resultArray += buckets[index] ? bucketize(array: buckets[index]!, exp: exp*10, max: max) : []
             if buckets[index] != nil {
                 resultArray += bucketize(array: buckets[index]!, exp: exp/10)
             }
@@ -37,6 +46,8 @@ class RadixSort {
         return resultArray
     }
 
+
+    // Simple method to count digits of a number
     func countDigits(number: Int) -> Int {
         var digitCount = 0
         var numberCopy = number
@@ -48,6 +59,7 @@ class RadixSort {
         return digitCount
     }
 
+    // Simple method to return base to the power of 'power'
     func power(base: Int, power: Int) -> Int {
         var number = base
         for _ in 0..<power {
@@ -59,5 +71,5 @@ class RadixSort {
 }
 
 
-
+// Simple test of the algorithm
 print(RadixSort().radixSort(array: [5, 67, 3, 1, 89, 100, 34, 78, 23, 103]))
