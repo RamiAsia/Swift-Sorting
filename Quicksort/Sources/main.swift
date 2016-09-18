@@ -1,14 +1,20 @@
 class QuickSort {
 
-  func quicksort<T: Comparable> (_  arr: [T] ) -> [T] {
+  func quicksort<T: Comparable> (_ arr: [T] ) -> [T] {
     if arr.isEmpty {
-      return arr
+        return arr
     } else {
-      let head = arr[0]
-      let body = arr[1..<arr.count]
-      let less = quicksort(body.filter( {$0 < head} ))
-      let greater = quicksort(body.filter( {$0 >= head} ))
-      return less + [head] + greater
+        // Start with the first element in array
+        let head = arr[0]
+        // The body is whatever follows the head
+        let body = arr[1..<arr.count]
+        /* Filter the body for any values less than the head, and values greater than head.
+        ** Recursively call quicksort method on each array to sort them
+        */
+        let less = quicksort(body.filter( {$0 < head} ))
+        let greater = quicksort(body.filter( {$0 >= head} ))
+        // return the sorted less array followed by the head followed by the sorted greater array
+        return less + [head] + greater
     }
   }
 }
