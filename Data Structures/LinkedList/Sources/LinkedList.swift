@@ -11,9 +11,10 @@ class LinkedList<T> {
     }
 
     public var count: Int {
-        if let node = head {
+        if var node = head {
             var i = 1
             while var currentNode = node.nextNode {
+                node = currentNode
                 i += 1
             }
             return i
@@ -37,14 +38,17 @@ class LinkedList<T> {
 
 
     public func append(_ item: T) {
-        let newNode = Node(item: item)
+        let newNode = Node(item:     item)
+        print("Checking placement")
         if let lastNode = last {
+            print("made if statement")
             lastNode.nextNode = newNode
             newNode.previousNode = lastNode
         }
         else {
             head = Node<T>(item: item)
         }
+        print("finish append")
     }
 
     public func addItem(_ item: T, atPosition: Int) {
@@ -69,5 +73,60 @@ class LinkedList<T> {
         head = nil
     }
 
+    public func removeLastItem() -> T? {
+        if var node = last {
+            let lastCopy = last
+            if count > 1 {
+                node = node.previousNode!
+                node.nextNode = nil
+            }
+            else {
+                removeFirstItem()
+            }
 
+            return lastCopy!.item
+        }
+        return nil
+    }
+
+    public func removeFirstItem() {
+        if count > 1 {
+            head = head!.nextNode
+            head!.previousNode = nil
+        }
+        else if !isEmpty {
+            head = nil
+        }
+    }
+
+    private func remove(_ node: Node<T>) -> T {
+        let prev = node.previousNode
+        let next = node.nextNode
+
+        if let prev = prev {
+            prev.nextNode = next
+        }
+        else {
+            head = next
+        }
+
+        next?.previousNode = prev
+        node.nextNode = nil
+        node.previousNode = nil
+        return node.item
+    }
+
+    public func removeItem(at: Int) -> T? {
+        if count <= at {
+            return removeLastItem()
+        }
+        else {
+            var node = head!
+            for _ in 0..<at {
+                node = node.nextNode!
+            }
+
+            return remove(node)
+        }
+    }
 }
