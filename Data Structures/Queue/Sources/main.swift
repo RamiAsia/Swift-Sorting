@@ -1,9 +1,9 @@
 let queue = Queue<Int>()
 
-queue.insert(item: 1)
-queue.insert(item: 2)
-queue.insert(item: 3)
-queue.insert(item: 4)
-queue.insert(item: 5)
+queue.enqueue(item: 1)
+queue.enqueue(item: 2)
+queue.enqueue(item: 3)
+queue.enqueue(item: 4)
+queue.enqueue(item: 5)
 
 print(queue.poll())

@@ -1,7 +1,7 @@
 class Queue<T> {
     var items = [T]()
 
-    public func insert(item: T) {
+    public func enqueue(item: T) {
         items.append(item)
     }
 
