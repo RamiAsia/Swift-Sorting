@@ -1,0 +1,13 @@
+let binarySearchTree = BinarySearchTree<Int>()
+
+binarySearchTree.insert(5)
+binarySearchTree.insert(3)
+binarySearchTree.insert(7)
+binarySearchTree.printInOrder()
+print("Root: \(binarySearchTree.root?.item)")
+print("Height: \(binarySearchTree.height)")
+binarySearchTree.insert(2)
+print("Height: \(binarySearchTree.height)")
+binarySearchTree.insert(1)
+print("Height: \(binarySearchTree.height)")
+binarySearchTree.printInOrder()
