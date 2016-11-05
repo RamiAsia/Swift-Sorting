@@ -39,16 +39,13 @@ class LinkedList<T> {
 
     public func append(_ item: T) {
         let newNode = Node(item:     item)
-        print("Checking placement")
         if let lastNode = last {
-            print("made if statement")
             lastNode.nextNode = newNode
             newNode.previousNode = lastNode
         }
         else {
             head = Node<T>(item: item)
         }
-        print("finish append")
     }
 
     public func addItem(_ item: T, atPosition: Int) {
